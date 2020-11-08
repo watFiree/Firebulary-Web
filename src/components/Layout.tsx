@@ -1,6 +1,8 @@
 import React from 'react';
-import useAuth from 'hooks/useAuth';
+import useRealtimeData from 'hooks/useRealtimeData';
+
 const Layout: React.FC = ({ children }) => {
+  useRealtimeData();
   return <div className=" container sm m-auto bg-orange-600 h-screen">{children}</div>;
 };
 

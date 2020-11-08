@@ -1,3 +1,5 @@
+import { TranslateWordResponse } from 'utils/types';
+
 const apiKey = process.env.REACT_APP_GOOGLE_TRANSLATION_KEY || '';
 
 const uri = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
@@ -11,7 +13,7 @@ const translateWord = async (word: string, source: string, target: string) => {
   };
 
   const response = await fetch(uri, { method: 'POST', body: JSON.stringify(body) });
-  const data = await response.json();
+  const data: TranslateWordResponse = await response.json();
   return data.data.translations[0].translatedText;
 };
 

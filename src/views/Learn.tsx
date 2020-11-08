@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import dataState from 'state/data';
 
-import Layout from 'components/Layout';
 import LearnType from 'components/learn-views/LearnType';
 import LearnChoose from 'components/learn-views/LearnChoose';
 
 const Learn = () => {
   const { dictionary } = useRecoilValue(dataState);
   const [view, setView] = useState(0);
-  const handleNextWord = () => setView(prev => prev + 1);
+  const handleNextView = () => setView(prev => prev + 1);
   return (
-    <Layout>
+    <>
       {view < dictionary.length ? (
         view % 2 ? (
-          <LearnType data={dictionary[view]} setNextWord={handleNextWord} />
+          <LearnType data={dictionary[view]} index={view} setNextView={handleNextView} />
         ) : (
-          <LearnChoose data={dictionary[view]} setNextWord={handleNextWord} />
+          <LearnChoose data={dictionary[view]} index={view} setNextView={handleNextView} />
         )
       ) : (
-        <h1>learn view</h1>
+        <Redirect to="app" />
       )}
-    </Layout>
+    </>
   );
 };
 

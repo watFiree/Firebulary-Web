@@ -1,29 +1,30 @@
 import { firestore } from 'fb';
-import getUserProfileDocument from './getUserProfileDocument';
+import { UserDocument, UserInputProps } from './types';
 
-const createUserProfileDocument = async (user: any, additionalInfo: any) => {
+const createUserProfileDocument = async (user: UserInputProps, additionalInfo: any) => {
   if (!user) return;
 
   const userRef = await firestore.doc(`users/${user.uid}`);
-  const snapshot = await userRef.get();
 
-  if (!snapshot.exists) {
-    const { displayName = '', email, photoURL = '' } = user;
-    const createdAt = new Date();
-    try {
-      await userRef.set({
-        displayName,
-        email,
-        photoURL,
-        createdAt,
-        ...additionalInfo,
-      });
-    } catch (err) {
-      console.log('error', err);
-    }
+  const { displayName = '', email, photoURL = '' } = user;
+  const createdAt = new Date();
+  try {
+    await userRef.set({
+      displayName,
+      email,
+      photoURL,
+      createdAt,
+      ...additionalInfo,
+    });
+    const userDoc = (await userRef.get()).data() as UserDocument;
+    const data = {
+      id: user.uid,
+      ...userDoc,
+    };
+    return data;
+  } catch (err) {
+    return new Error(err.message);
   }
-
-  return getUserProfileDocument(user.uid);
 };
 
 export default createUserProfileDocument;

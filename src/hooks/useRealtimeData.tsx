@@ -1,27 +1,40 @@
 import { useEffect } from 'react';
-import { firestore } from 'fb';
+import { firestore, auth } from 'fb';
 import userState from 'state/user';
 import dataState from 'state/data';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+
+import useLoginUserAndRedirect from './useLoginUserAndRedirect';
 
 const useRealtimeData = () => {
   const [user, updateUser] = useRecoilState(userState);
+  const resetUser = useResetRecoilState(userState);
+  const resetData = useResetRecoilState(dataState);
   const [, updateData] = useRecoilState(dataState);
+  const setUserAndRedirect = useLoginUserAndRedirect();
+  useEffect(() => {
+    console.log('state', user);
+    const unsubscribe = auth.onAuthStateChanged(async snapshot => {
+      if (snapshot && !user.auth) {
+        await setUserAndRedirect(snapshot);
+      }
+      if (!snapshot && user.auth) {
+        resetUser();
+        resetData();
+      }
+    });
+    return () => unsubscribe();
+  }, [user, resetUser, resetData, setUserAndRedirect]);
 
   useEffect(() => {
     if (user.auth && user.id) {
-      //data observer
-      firestore.doc(`data/${user.id}`).onSnapshot(snapshot => {
+      const dataObserver = firestore.doc(`data/${user.id}`).onSnapshot(snapshot => {
         updateData(snapshot.data() as any);
       });
 
-      //user observer
-      firestore.doc(`users/${user.id}`).onSnapshot(snapshot => {
-        const userProfileData = { auth: true, id: user.id, ...snapshot.data() };
-        updateUser(userProfileData as any);
-      });
+      return () => dataObserver();
     }
-  }, [user.auth, user.id, updateUser, updateData]);
+  }, [user, updateUser, updateData]);
 
   return user;
 };

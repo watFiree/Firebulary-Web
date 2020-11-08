@@ -1,19 +1,32 @@
-import React from 'react';
-import { WordProp } from 'utils/types';
+import React, { useState } from 'react';
+import { LearnViewProps } from 'utils/types';
 
-const LearnChoose: React.FC<{ data: WordProp; setNextWord: () => void }> = ({
-  data,
-  setNextWord,
-}) => {
+import shuffleArray from 'utils/shuffleArray';
+import useAnsweredCorrectly from 'hooks/useAnsweredCorrectly';
+
+const LearnChoose: React.FC<LearnViewProps> = ({ index, data, setNextView }) => {
+  const [wrongAnswer, setWrongAnswer] = useState(false);
+  const words = ['shit', data.translation, 'fuck', 'sex'];
+  const answers = shuffleArray(words);
+  const answeredCorrectly = useAnsweredCorrectly();
+
+  const handleCheck = (word: string) => {
+    if (word === data.translation) {
+      answeredCorrectly(index);
+      setNextView();
+    } else {
+      setWrongAnswer(true);
+    }
+  };
   return (
     <>
       <h1>Firebulary</h1>
       <div>{data.word}</div>
-      <div>
-        <button onClick={setNextWord}>a</button>
-        <button>{data.translation}</button>
-        <button>c</button>
-        <button>d</button>
+      {wrongAnswer ? <p>wrong !</p> : null}
+      <div className="flex flex-col">
+        {answers.map(word => (
+          <button onClick={() => handleCheck(word)}>{word}</button>
+        ))}
       </div>
     </>
   );

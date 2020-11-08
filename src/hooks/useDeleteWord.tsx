@@ -1,10 +1,10 @@
 import { firestore } from 'fb';
 import { useRecoilValue } from 'recoil';
-import userState from 'state/user';
+import useUser from './useUser';
 import dataState from 'state/data';
 
 const useDeleteWord = () => {
-  const { id } = useRecoilValue(userState);
+  const { id } = useUser();
   const { dictionary } = useRecoilValue(dataState);
 
   const handleDelete = async (indicator: number) => {

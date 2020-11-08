@@ -15,6 +15,14 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase
+  .auth()
+  .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => console.log(err.message));
+
 window.firebase = firebase;
 
 export const firestore = firebase.firestore();

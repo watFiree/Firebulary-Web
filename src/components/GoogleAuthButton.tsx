@@ -1,15 +1,13 @@
 import React from 'react';
-import { auth, providers } from 'fb';
-import useLoginUserAndRedirect from 'hooks/useLoginUserAndRedirect';
+import firebase, { auth, providers } from 'fb';
 
 import GoogleIcon from 'assets/google_logo.png';
 
 const GoogleAuthButton = () => {
-  const setUserAndRedirect = useLoginUserAndRedirect();
   const handleClick = () =>
     auth
-      .signInWithPopup(providers.google)
-      .then(setUserAndRedirect)
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => firebase.auth().signInWithPopup(providers.google))
       .catch(err => console.log(err));
 
   return (

@@ -1,25 +1,23 @@
 import { firestore } from 'fb';
 import translateWord from './translateWord';
+import detectLanguage from './detectLanguage';
 
-interface Data {
-  word: string;
-  translation: string;
-  autoTranslate: boolean;
-  translateFrom: string;
-  translateTo: string;
-}
+import { AddWordInputProps } from 'utils/types';
 
-const addWordToDictionary = async (uid: string, data: Data) => {
+const addWordToDictionary = async (uid: string, data: AddWordInputProps) => {
   const userData = await firestore.doc(`data/${uid}`);
   const snapshot = await userData.get();
-  const processAdding = async (word: string, translation: string) => {
+  const processAdding = async (word: string, translation: string, translationLang: string) => {
     if (snapshot.exists) {
       try {
         const database = await snapshot.data();
-        if (database && database.dictionary.length) {
+        if (database) {
           await userData.set(
             {
-              dictionary: [...database.dictionary, { word, translation }],
+              dictionary: [
+                ...database.dictionary,
+                { word, translation, translationLang, answeredCorrectly: 0 },
+              ],
             },
             { merge: true }
           );
@@ -27,18 +25,16 @@ const addWordToDictionary = async (uid: string, data: Data) => {
         }
         return new Error('Could not find database !');
       } catch (err) {
-        console.log(err);
         return new Error(err);
       }
     } else {
       try {
         await userData.set({
-          dictionary: [{ word, translation }],
+          dictionary: [{ word, translation, translationLang, answeredCorrectly: 0 }],
           learnt: [],
         });
         return true;
       } catch (err) {
-        console.log(err);
         return new Error(err.message);
       }
     }
@@ -46,10 +42,11 @@ const addWordToDictionary = async (uid: string, data: Data) => {
 
   if (data.autoTranslate) {
     const translatedWord = await translateWord(data.word, data.translateFrom, data.translateTo);
-    const result = await processAdding(data.word, translatedWord);
+    const result = await processAdding(data.word, translatedWord, data.translateTo);
     return result;
   } else {
-    const result = await processAdding(data.word, data.translation);
+    const translatedWordLang = await detectLanguage(data.translation);
+    const result = await processAdding(data.word, data.translation, translatedWordLang);
     return result;
   }
 };

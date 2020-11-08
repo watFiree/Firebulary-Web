@@ -1,15 +1,14 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import dataState from 'state/data';
 
 import useDeleteWord from 'hooks/useDeleteWord';
-import Layout from 'components/Layout';
 
 const Dictionary = () => {
-  const [{ dictionary }, setState] = useRecoilState(dataState);
+  const { dictionary } = useRecoilValue(dataState);
   const handleDelete = useDeleteWord();
   return (
-    <Layout>
+    <>
       <h1>Dictionary</h1>
       <table>
         <tr>
@@ -26,7 +25,7 @@ const Dictionary = () => {
           </tr>
         ))}
       </table>
-    </Layout>
+    </>
   );
 };
 
