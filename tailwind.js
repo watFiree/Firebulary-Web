@@ -154,6 +154,9 @@ module.exports = {
       48: '12rem',
       56: '14rem',
       64: '16rem',
+      72: '18rem',
+      80: '20rem',
+      96: '24rem',
     },
     backgroundColor: theme => theme('colors'),
     backgroundImage: {
@@ -196,6 +199,9 @@ module.exports = {
       default: '0.25rem',
       md: '0.375rem',
       lg: '0.5rem',
+      xl: '0.75rem',
+      '2xl': '1rem',
+      '3xl': '1.5rem',
       full: '9999px',
     },
     borderWidth: {
@@ -248,6 +254,7 @@ module.exports = {
       default: '1',
     },
     fontFamily: {
+      body: ['Roboto', 'sans-serif'],
       sans: [
         'system-ui',
         '-apple-system',
@@ -292,6 +299,8 @@ module.exports = {
     height: theme => ({
       auto: 'auto',
       ...theme('spacing'),
+      '1/3': '33%',
+      '2/3': '66%',
       full: '100%',
       screen: '100vh',
     }),
@@ -359,6 +368,8 @@ module.exports = {
     },
     minWidth: {
       0: '0',
+      '1/3': '33.33%',
+      '2/3': '66.66%',
       full: '100%',
     },
     objectPosition: {

@@ -12,7 +12,7 @@ const GoogleAuthButton = () => {
 
   return (
     <button
-      className="btn bg-white h-12 px-6 rounded-lg font-semibold text-gray-700 flex items-center justify-center hover:border-gray-800 "
+      className="btn bg-gray-200 h-12 px-8 mt-12 mb-5 rounded-lg font-semibold text-gray-800 flex items-center justify-center border-2 hover:border-gray-800"
       onClick={handleClick}
     >
       <img src={GoogleIcon} alt="Google" className="h-10 w-10 mr-2" />

@@ -13,6 +13,7 @@ const SelectLanguageField: React.FC<{ name: string }> = ({ name }) => {
         localStorage.setItem(name, e.target.value);
       }}
       placeholder="to"
+      className="h-10 w-1/3 px-2 text-lg placeholder-gray-500::placeholder placeholder-opacity-75 border-solid border-1 border-gray-700 rounded-xl shadow"
     >
       {languages?.map(language => (
         <option value={language.language} key={language.language}>

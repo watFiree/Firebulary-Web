@@ -1,11 +1,16 @@
 import React from 'react';
 import firebase, { auth } from 'fb';
 import { Formik } from 'formik';
-import Form from 'components/SignForm';
-import GoogleAuthButton from 'components/GoogleAuthButton';
+
+import Wrapper from 'components/SignView/Wrapper';
+import Header from 'components/SignView/Header';
+import Form from 'components/SignView/Form';
+import GoogleAuthButton from 'components/SignView/GoogleAuthButton';
+import RedirectToAnother from 'components/SignView/RedirectToAnother';
 
 const SignIn = () => (
-  <div className="flex flex-col items-center h-screen justify-center ">
+  <Wrapper>
+    <Header>Sign In</Header>
     <GoogleAuthButton />
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -28,9 +33,12 @@ const SignIn = () => (
           .catch(err => setErrors({ password: err.message }));
       }}
     >
-      <Form label="Sign In" />
+      <>
+        <Form label="Sign In" />
+        <RedirectToAnother type="signin" />
+      </>
     </Formik>
-  </div>
+  </Wrapper>
 );
 
 export default SignIn;

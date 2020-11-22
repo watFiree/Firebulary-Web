@@ -1,10 +1,14 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import addWordToDictionary from 'utils/addWordToDictionary';
 import * as yup from 'yup';
 
-import SelectLanguageField from 'components/SelectLanguageField';
-import SwapSelectsButton from 'components/SwapSelectsButton';
+import TextInput from './TextInput';
+import CheckBox from './CheckBox';
+import SelectLanguageField from './SelectLanguageField';
+import SwapSelectsButton from './SwapSelectsButton';
+import ErrorMessage from './ErrorMessage';
+import Button from './Button';
 
 const AddWordForm: React.FC<{ uid: string }> = ({ uid }) => (
   <>
@@ -29,25 +33,20 @@ const AddWordForm: React.FC<{ uid: string }> = ({ uid }) => (
       }}
     >
       {({ values }) => (
-        <Form className="flex flex-col">
-          <Field name="word" placeholder="Word" />
-          {values.autoTranslate ? null : <Field name="translation" placeholder="Translation" />}
-          <Field type="checkbox" name="autoTranslate" placeholder="Translate automatically" />
+        <Form className="flex flex-col items-center w-3/5 h-80 justify-around">
+          <TextInput name="word" placeholder="Word" />
+          {values.autoTranslate ? null : <TextInput name="translation" placeholder="Translation" />}
+          <CheckBox name="autoTranslate" placeholder="Auto translate" />
+
           {values.autoTranslate ? (
-            <div className="flex mt-10">
-              <SwapSelectsButton
-                label="Swap"
-                firstVariable="translateFrom"
-                secondVariable="translateTo"
-              />
-              <p>translate</p>
+            <div className="flex w-full h-1/3 items-center justify-center">
               <SelectLanguageField name="translateFrom" />
-              <p>to</p>
+              <SwapSelectsButton firstVariable="translateFrom" secondVariable="translateTo" />
               <SelectLanguageField name="translateTo" />
             </div>
           ) : null}
           <ErrorMessage name="word" />
-          <button type="submit">Add</button>
+          <Button type="submit">Add</Button>
         </Form>
       )}
     </Formik>
