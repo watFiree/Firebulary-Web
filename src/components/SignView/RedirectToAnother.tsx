@@ -15,9 +15,9 @@ const options = {
 };
 
 const RedirectToAnother: React.FC<{ type: 'signin' | 'signup' }> = ({ type }) => (
-  <p className="font-bold text-gray-800 text-opacity-75">
+  <p className="font-bold text-black text-opacity-75">
     {options[type].label}
-    <Link to={options[type].href} className=" ml-2 text-red-800 font-bold">
+    <Link to={options[type].href} className=" ml-2 text-blue-700 font-bold">
       {options[type].buttonLabel}
     </Link>
   </p>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+const colors = require('tailwindcss/colors');
 
 const Navigation = () => {
   const linkStyle =
-    'flex flex-col items-center justify-center text-lg text-gray-800 font-bold hover:underline focus:underline';
+    'flex flex-col items-center justify-center text-lg text-gray-900 font-bold hover:underline focus:underline';
   return (
     <div className="w-3/4 mx-auto h-24 flex items-center justify-around">
       <Link to="/learn" className={linkStyle}>
@@ -14,7 +15,7 @@ const Navigation = () => {
           height="44"
           viewBox="0 0 24 24"
           stroke-width="1.5"
-          stroke="#2d3748"
+          stroke={colors.gray[900]}
           fill="none"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -33,7 +34,7 @@ const Navigation = () => {
           height="44"
           viewBox="0 0 24 24"
           stroke-width="1.5"
-          stroke="#2d3748"
+          stroke={colors.gray[900]}
           fill="none"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -53,7 +54,7 @@ const Navigation = () => {
           height="44"
           viewBox="0 0 24 24"
           stroke-width="1.5"
-          stroke="#2d3748"
+          stroke={colors.gray[900]}
           fill="none"
           stroke-linecap="round"
           stroke-linejoin="round"

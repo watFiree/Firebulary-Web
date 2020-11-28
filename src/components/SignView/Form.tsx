@@ -8,7 +8,7 @@ import Button from '../Button';
 const SignForm: React.FC<{ label: string }> = ({ label }) => {
   return (
     <>
-      <p className="font-bold text-gray-800 text-opacity-75">or</p>
+      <p className="font-bold text-opacity-75">or</p>
       <Form className="w-4/5 h-1/3 mt-5 flex flex-col items-center  justify-between ">
         <TextInput type="email" name="email" placeholder="Email address" />
         <ErrorMessage name="email" />
@@ -16,7 +16,7 @@ const SignForm: React.FC<{ label: string }> = ({ label }) => {
         <ErrorMessage name="password" />
         <Button>{label}</Button>
       </Form>
-      <button className="my-8 font-bold text-gray-800 text-opacity-75">forgot password?</button>
+      <button className="my-8 font-bold text-black text-opacity-75">forgot password?</button>
     </>
   );
 };

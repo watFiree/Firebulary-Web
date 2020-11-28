@@ -34,16 +34,18 @@ const LearnChoose: React.FC<LearnViewProps> = ({ index, data, setNextView }) => 
         ) : null}
         {wrongAnswer ? <p className="text-red-700 text-xl font-semibold">Wrong answer !</p> : null}
       </div>
+
       <div className="flex flex-wrap align-center justify-center w-2/3 mx-auto h-1/3">
         {answers.map((word, index) => (
           <button
-            className="w-64 h-24 mx-16 bg-orange-700 border-gray-900 border-2 text-2xl"
+            className="w-64 h-24 mx-16 bg-none hover:bg-blue-700 border-gray-900 dark:border-black border-2 text-2xl"
             onClick={() => handleCheck(word)}
           >
             {String.fromCharCode(97 + index).toUpperCase()}. {word}
           </button>
         ))}
       </div>
+
       <div className="w-1/3 mx-auto h-48 flex flex-col items-center justify-around">
         {showResult ? null : (
           <Button color="indigo" onClick={() => setShowResult(true)}>

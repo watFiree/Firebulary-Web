@@ -15,7 +15,7 @@ const Dictionary = () => {
         <tr>
           <th className="w-2/5 text-xl py-2 border-2 border-black ">Word</th>
           <th className="w-2/5 text-xl py-2 border-2 border-black">Translation</th>
-          <th className="w-1/5 text-xl py-2 border-2 border-black">Actions</th>
+          <th className="w-1/5 text-xl py-2 px-2 border-2 border-black">Actions</th>
         </tr>
         {dictionary.map((section, index) => (
           <tr key={index}>
