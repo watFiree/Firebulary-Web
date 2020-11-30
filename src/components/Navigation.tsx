@@ -6,7 +6,7 @@ const Navigation = () => {
   const linkStyle =
     'flex flex-col items-center justify-center text-lg text-gray-900 font-bold hover:underline focus:underline';
   return (
-    <div className="w-3/4 mx-auto h-24 flex items-center justify-around">
+    <div className="w-full lg:w-3/4 mx-auto h-24 flex items-center justify-around">
       <Link to="/learn" className={linkStyle}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

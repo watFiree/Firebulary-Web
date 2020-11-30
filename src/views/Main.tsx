@@ -15,7 +15,7 @@ const Main = () => {
       <div className="w-full h-2/3 flex justify-center mt-20">
         <div className="w-2/5 flex flex-col items-center">
           <div className="mx-auto w-full">
-            <p className="text-7xl text-center font-bold tracking-wide mt-8 mb-16 leading-tight">
+            <p className=" text-4xl xl:text-7xl md:text-5xl  text-center font-bold tracking-wide mt-8 mb-16 leading-tight">
               Learn any language
               <br />
               fast and

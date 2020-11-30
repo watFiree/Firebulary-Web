@@ -33,7 +33,7 @@ const AddWordForm: React.FC<{ uid: string }> = ({ uid }) => (
       }}
     >
       {({ values }) => (
-        <Form className="flex flex-col items-center w-3/5 h-80 justify-around">
+        <Form className="flex flex-col items-center w-full md:w-3/5 h-80 justify-around">
           <TextInput name="word" placeholder="Word" />
           {values.autoTranslate ? null : <TextInput name="translation" placeholder="Translation" />}
           <CheckBox name="autoTranslate" placeholder="Auto translate" />

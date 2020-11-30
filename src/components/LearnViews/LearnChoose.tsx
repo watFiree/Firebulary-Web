@@ -27,18 +27,18 @@ const LearnChoose: React.FC<LearnViewProps> = ({ index, data, setNextView }) => 
 
   return (
     <>
-      <div className="h-1/3 w-full flex flex-col items-center justify-center">
-        <h2 className="text-6xl text-black">{data.word}</h2>
+      <div className="h-1/6 lg:h-1/3 w-full flex flex-col items-center justify-center">
+        <h2 className="sm:text-6xl text-4xl text-black">{data.word}</h2>
         {showResult ? (
-          <p className="text-4xl text-gray-200 font-semibold">{data.translation}</p>
+          <p className="sm:text-4xl text-2xl text-gray-200 font-semibold">{data.translation}</p>
         ) : null}
         {wrongAnswer ? <p className="text-red-700 text-xl font-semibold">Wrong answer !</p> : null}
       </div>
 
-      <div className="flex flex-wrap align-center justify-center w-2/3 mx-auto h-1/3">
+      <div className="flex flex-wrap align-center justify-center w-full sm:w-3/4 mx-auto h-full md:h-2/3">
         {answers.map((word, index) => (
           <button
-            className="w-64 h-24 mx-16 bg-none hover:bg-blue-700 border-gray-900 dark:border-black border-2 text-2xl"
+            className="sm:w-64 w-48 sm:h-24 h-20 mx-8 2xl:mx-16 bg-none hover:bg-blue-700 border-gray-900 dark:border-black border-2 text-2xl"
             onClick={() => handleCheck(word)}
           >
             {String.fromCharCode(97 + index).toUpperCase()}. {word}
