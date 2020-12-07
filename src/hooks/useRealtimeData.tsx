@@ -13,7 +13,6 @@ const useRealtimeData = () => {
   const [, updateData] = useRecoilState(dataState);
   const setUserAndRedirect = useLoginUserAndRedirect();
   useEffect(() => {
-    console.log('state', user);
     const unsubscribe = auth.onAuthStateChanged(async snapshot => {
       if (snapshot && !user.auth) {
         await setUserAndRedirect(snapshot);

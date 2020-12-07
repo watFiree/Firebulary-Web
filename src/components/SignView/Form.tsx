@@ -16,7 +16,9 @@ const SignForm: React.FC<{ label: string }> = ({ label }) => {
         <ErrorMessage name="password" />
         <Button>{label}</Button>
       </Form>
-      <button className="my-8 font-bold text-black text-opacity-75">forgot password?</button>
+      <button className="my-8 font-bold text-black text-opacity-75 underline">
+        forgot password?
+      </button>
     </>
   );
 };

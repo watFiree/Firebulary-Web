@@ -10,9 +10,9 @@ import LearnChoose from 'components/LearnViews/LearnChoose';
 const Learn = () => {
   const { dictionary } = useRecoilValue(dataState);
   const [view, setView] = useState(0);
-  const handleNextView = () => setView(prev => prev + 1);
+  const handleNextView = () => setTimeout(() => setView(prev => prev + 1), 1000);
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col relative">
       <Heading label="Learn" />
       {view < dictionary.length ? (
         view % 2 ? (

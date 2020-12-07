@@ -5,6 +5,7 @@ const createUserProfileDocument = async (user: UserInputProps, additionalInfo: a
   if (!user) return;
 
   const userRef = await firestore.doc(`users/${user.uid}`);
+  const dataRef = await firestore.doc(`data/${user.uid}`);
 
   const { displayName = '', email, photoURL = '' } = user;
   const createdAt = new Date();
@@ -15,6 +16,10 @@ const createUserProfileDocument = async (user: UserInputProps, additionalInfo: a
       photoURL,
       createdAt,
       ...additionalInfo,
+    });
+    await dataRef.set({
+      dictionary: [],
+      learnt: [],
     });
     const userDoc = (await userRef.get()).data() as UserDocument;
     const data = {
