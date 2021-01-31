@@ -1,13 +1,13 @@
 import React from 'react';
+import { functions } from 'fb';
 import { useRecoilValue } from 'recoil';
 import dataState from 'state/data';
 
 import Heading from 'components/SubViewHeading';
-import useDeleteWord from 'hooks/useDeleteWord';
 
 const Dictionary = () => {
   const { dictionary } = useRecoilValue(dataState);
-  const handleDelete = useDeleteWord();
+  const deleteWord = functions.httpsCallable('deleteWord');
   return (
     <div className="w-full h-full flex flex-col">
       <Heading label="Dictionary" />
@@ -26,7 +26,7 @@ const Dictionary = () => {
               {section.translation}
             </td>
             <td className="border-2 border-black text-center">
-              <button onClick={() => handleDelete(index)}>
+              <button onClick={() => deleteWord(index)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-bucket"

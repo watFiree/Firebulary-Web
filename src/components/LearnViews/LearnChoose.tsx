@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { functions } from 'fb';
 import { LearnViewProps } from 'utils/types';
 
-import shuffleArray from 'utils/shuffleArray';
 import useLearnViewFunctions from 'hooks/useLearnViewFunctions';
 import AnswerResponse from './AnswerResponse';
 import Button from 'components/Button';
@@ -14,8 +14,14 @@ const LearnChoose: React.FC<LearnViewProps> = ({ index, data, setNextView }) => 
     isResultShown,
     showResult,
   ] = useLearnViewFunctions(index, data.translation, setNextView);
-  const words = ['shit', data.translation, 'fuck', 'sex'];
-  const [answers] = useState(() => shuffleArray(words));
+  const [answers, setAnswers] = useState<string[]>([]);
+  const shuffleArray = functions.httpsCallable('shuffleArray');
+  useEffect(() => {
+    console.log('shuffled');
+    shuffleArray(['shit', data.translation, 'fuck', 'sex'])
+      .then(res => setAnswers(res.data))
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <>

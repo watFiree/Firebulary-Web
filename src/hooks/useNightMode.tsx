@@ -5,8 +5,6 @@ type ModeTypes = 'night' | 'day';
 const useNightMode = (): [ModeTypes, () => void] => {
   const [theme, setTheme] = useState<ModeTypes>(getStorageTheme() || 'day');
   useEffect(() => {
-    // const storage = getStorageTheme();
-    // if(storage && storage !== theme) setTheme(storage);
     if (theme === 'night') {
       document.querySelector('html')?.classList.add('dark');
     } else {

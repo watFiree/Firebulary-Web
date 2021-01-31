@@ -1,16 +1,16 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/functions';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCIGlUDdOtw9Wal-L98O1vc2u31RFaqm3w',
-  authDomain: 'firebulary.firebaseapp.com',
-  databaseURL: 'https://firebulary.firebaseio.com',
-  projectId: 'firebulary',
-  storageBucket: 'firebulary.appspot.com',
-  messagingSenderId: '1053649833607',
-  appId: '1:1053649833607:web:5b2ddf90024a2467947222',
-  measurementId: 'G-M4G1Y85D5H',
+  apiKey: 'AIzaSyC32vk7CBUH2ZOoq39TXjzLd9Y5MVZKCrY',
+  authDomain: 'firebulary-f485e.firebaseapp.com',
+  projectId: 'firebulary-f485e',
+  storageBucket: 'firebulary-f485e.appspot.com',
+  messagingSenderId: '276514693749',
+  appId: '1:276514693749:web:805234499c9c9041890e3c',
+  measurementId: 'G-47LHRYWVQK',
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -23,10 +23,9 @@ firebase
   })
   .catch(err => console.log(err.message));
 
-window.firebase = firebase;
-
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
+export const functions = firebase.functions();
 
 export const providers = {
   google: new firebase.auth.GoogleAuthProvider(),
