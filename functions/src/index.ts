@@ -84,14 +84,21 @@ export const addWordToDictionary = functions.https.onCall(async (data, context) 
       source: data.translateFrom,
       target: data.translateTo,
     });
+
     if (translatedWord instanceof Error) return translatedWord;
-    const result = await processAdding(data.word, translatedWord, data.translateTo);
+
+    const result = await processAdding(data.word.trim(), translatedWord, data.translateTo);
     return result;
   } else {
-    // owns already translation, only translateWordLanguage left
+    // owns already translation, only find translateWordLanguage left
     const translatedWordLanguage = await detectLanguage(data.translation);
     if (translatedWordLanguage instanceof Error) return translatedWordLanguage;
-    const result = await processAdding(data.word, data.translation, translatedWordLanguage);
+
+    const result = await processAdding(
+      data.word.trim(),
+      data.translation.trim(),
+      translatedWordLanguage
+    );
     return result;
   }
 });

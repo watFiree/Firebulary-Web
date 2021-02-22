@@ -9,7 +9,7 @@ const Dictionary = () => {
   const { dictionary } = useRecoilValue(dataState);
   const deleteWord = functions.httpsCallable('deleteWord');
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full min-h-full h-full flex flex-col">
       <Heading label="Dictionary" />
       <table className="table-fixed mt-8 mx-auto min-w-2/3 border-black border-2">
         <tr>
