@@ -6,7 +6,7 @@ Firebulary is a vocabulary learning app built for mobile devices and web.
 
 <img src="https://i.ibb.co/gr7YMqL/web1.png" alt="main-view" width="90%" border="0">
 
-<img src="https://i.ibb.co/jTXJzGP/web2.png" alt="learn-view"width="90%" border="0">
+<img src="https://i.ibb.co/jTXJzGP/web2.png" alt="learn-view" width="90%" border="0">
 
 ## Tech 🔧
 
